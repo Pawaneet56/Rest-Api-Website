@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database data</title>
+</head>
+
+<body>
+    <ul>
+        <% users.forEach(function(user) { %>
+            <p>
+                <%=user['id'] %>
+            </p>
+            <li>
+                name : <%= user['name'] %>
+            </li>
+            <li>
+                Email id : <%= user['email_id'] %>
+            </li>
+            <li>
+                Date of joining : <%= user['DOJ'] %>
+            </li>
+            <li>
+                Project name : <%= user['project_name'] %>
+            </li>
+            <li>
+                Part name : <%= user['part_name'] %>
+            </li>
+            <li>
+                 Swc eligible? : <%= user['swc_eligible'] %>
+            </li>
+            <li>
+                Swc status :  <%= user['swc_status'] %>
+            </li>
+            <% }); %>
+    </ul>
+</body>
+
+</html>

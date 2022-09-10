@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>
+
+        AngularJs Select Box or Dropdown List example
+
+    </title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+</head>
+
+<body ng-app="">
+
+    <div>
+
+        <h3>Create Training</h3>
+        <form method="post" action="/createtraining">
+
+            <input type="hidden" value="<%= name %>" id="trainer" name="trainer">
+            <label>
+                <select name="team" id="team" required>
+                    <option value="">--Team--</option>
+
+                    <% exceldata.forEach(function(dat) { %>
+                        <option value="<%=dat.Team%>">
+                            <%= dat.Team %>
+                        </option>
+                        <% }); %>
+                </select>
+            </label>
+            <label>
+                <select name="group" id="group" required>
+
+                    <option value="">--Group--</option>
+
+                    <% exceldata.forEach(function(dat) { %>
+                        <option value="<%=dat.Group%>">
+                            <%= dat.Group %>
+                        </option>
+                        <% }); %>
+                </select>
+            </label>
+            <select name="part" id="part" required>
+
+                <option value="">--Part--</option>
+
+                <% exceldata.forEach(function(dat) { %>
+                    <option value="<%=dat.Part%>">
+                        <%= dat.Part %>
+                    </option>
+                    <% }); %>
+            </select>
+
+
+
+            <select name="project" id="project" required>
+
+                <option value="">--Project--</option>
+
+                <% exceldata.forEach(function(dat) { %>
+                    <option value="<%=dat.Project%>">
+                        <%= dat.Project %>
+                    </option>
+                    <% }); %>
+            </select>
+            <select name="member" id="member" required>
+
+                <option value="">--Member--</option>
+                <% exceldata.forEach(function(dat) { %>
+                    <option value="<%=dat.Member%>">
+                        <%= dat.Member %>
+                    </option>
+                    <% }); %>
+            </select>
+
+
+            <br><br>
+
+            <select name="subject" id="subject" required>
+                <option value="">--Subject--</option>
+                <% exceldata.forEach(function(dat) { %>
+                    <option value="<%=dat.Subject%>">
+                        <%= dat.Subject %>
+                    </option>
+                    <% }); %>
+            </select>
+            <select name="topic" id="topic" required>
+                <option value="">--Topic--</option>
+                <% exceldata.forEach(function(dat) { %>
+                    <option value="<%=dat.Topic%>">
+                        <%= dat.Topic %>
+                    </option>
+                    <% }); %>
+            </select>
+            <label for="startdate">
+                Start Date
+            </label>
+            <input type="date" id="startdate" name="startdate" required>
+            <label for="enddate">
+                End Date
+            </label>
+            <input type="date" id="enddate" name="enddate" required>
+
+
+            <input type="submit" id="add" value="add">
+            <br><br>
+
+        </form>
+        <table id="datatraining" border="1" width="90%">
+            <tr>
+                <th>Subject</th>
+                <th>Topic</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Overdue By</th>
+                <th>Current Status</th>
+                <th>Status Verification by PL</th>
+                <th>Action</th>
+
+
+            </tr>
+
+            <% users.forEach(function(user) { %>
+                <tr>
+                    <td>
+                        <%=user['subject'] %>
+                    </td>
+                    <td>
+                        <%=user['topic'] %>
+                    </td>
+                    <td>
+                        <%=user['startdate'] %>
+                    </td>
+                    <td>
+                        <%=user['enddate'] %>
+                    </td>
+                    <td>
+                        <%=user['overdue'] %> Days
+                    </td>
+                    <td>
+                        <%=user['current_status'] %>%
+                    </td>
+                    <td>
+                        <%=user['status_verification'] %>%
+                    </td>
+                    <td><a href="deletetraining?id=<%=user['id'] %>&trainer=<%=name%>">Delete</a></td>
+
+                </tr>
+                <% }); %>
+
+        </table>
+        <form method="post" action="/pushtraining">
+            <input type="submit" id="create" value="create">
+        </form>
+    </div>
+
+</body>
+
+
+</html>

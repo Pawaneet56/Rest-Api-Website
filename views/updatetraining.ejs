@@ -1,0 +1,25 @@
+<h1>Update training</h1>
+<form action="" method="POST">
+    <input type="hidden" name="id" value="<%= student[0].id %>" required><br><br>
+    <input type="hidden" value="<%= name %>" id="trainer" name="trainer">
+    <p>
+        Previous start date <%= student[0].startdate%>
+    </p><br>
+    <p>
+        Previous end date <%= student[0].enddate%>
+    </p><br>
+
+    <label for="startdate">New start date</label>
+    <input type="date" name="startdate" value="<%= student[0].startdate %>" placeholder="Enter startdate"
+        required><br><br>
+    <label for="enddate">New End date</label>
+    <input type="date" name="enddate" value="<%= student[0].enddate %>" placeholder="Enter enddate" required><br><br>
+    <label for="current_status">Current status</label>
+    <input type="number" name="current_status" value="<%= student[0].current_status %>"
+        placeholder="Enter current_status" required><br><br>
+    <label for="status_verification">Status verification </label>
+    <input type="number" name="status_verification" value="<%= student[0].status_verification %>"
+        placeholder="Enter status verification" required><br><br>
+    <input type="submit" value="Submit">
+
+</form>

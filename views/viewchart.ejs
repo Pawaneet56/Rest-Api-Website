@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<body>
+    <img src="https://snapshots.raintank.io/dashboard/snapshot/sDYIh9aBrNrAeHTSPk044WP6ZPRzC2ok">
+    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    <a href="createtraining?name=<%= name %>&loggedin=true">create training</a>
+    <br><br>
+    <a href="viewtraining?name=<%= name %>&loggedin=true">view training</a>
+    <script>
+        var subjects = '<%- subjects %>';
+        var current_status = '<%- current_status %>';
+
+        //alert(subjects);
+        //alert(current_status);
+        var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+        var yValues = [55, 49, 44, 24, 15];
+        var barColors = ["red", "green", "blue", "black", "red"];
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "World Wine Production 2018"
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Refresh" content="1000">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        #myiframe {
+            width: 120%;
+            margin-left: -75px;
+            margin-top: -70px;
+        }
+    </style>
+    <iframe src="http://localhost:3000/d/bzjxls3nk/first-dashboard?orgId=1&from=1657683539826&to=1657705139826"
+        id="myiframe" height="900"></iframe>
+
+    <p>I am building my own grafana project</p>
+</body>
+
+<script>
+    $("#myiframe").on("load", function () {
+        this.contentWindow.addEventListener(
+            "keydown",
+            function (event) {
+                // Block user from exiting grafana ui easily (esc and F keys)
+                if (event.keyCode === 27 || event.keyCode === 70) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return false;
+                }
+            },
+            true
+        );
+    });
+</script>
+
+
+</html> -->
