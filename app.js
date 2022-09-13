@@ -236,31 +236,50 @@ app.post('/pushtraining', (req, res) => {
 //All the trainings will be viewed here for the specific data 
 app.get('/viewtraining', (req, res) => {
     if (req.query.loggedin) {
-        var team = req.query.team;
-        var group = req.query.group;
-        var part = req.query.part;
-        var project = req.query.project;
-        var member = req.query.member;
-        var name = req.query.trainer;
-        //if any value is null then show the full data
-        if (!team || !group || !part || !project || !member) {
-            connection.query(`select id,subject,topic,DATE_FORMAT(startdate,'%d-%b-%Y') as startdate,DATE_FORMAT(enddate,'%d-%b-%Y') as
-             enddate,case when datediff(startdate,enddate)<0 then 0 else datediff(startdate,enddate) end as overdue,current_status,status_verification 
-             from training where trainer=? order by subject `, [name], (err, result) => {
-                if (err) throw err;
-                res.render('./viewtraining.ejs', { users: result, exceldata: exceldata, name: name });
-            })
+        // var team = req.query.team;
+        // var group = req.query.group;
+        // var part = req.query.part;
+        // var project = req.query.project;
+        // var member = req.query.member;
+        // var name = req.query.trainer;
+        // console.log(name);
+        // //if any value is null then show the full data
+        // if (!team || !group || !part || !project || !member) {
+            // connection.query(`select id,subject,topic,DATE_FORMAT(startdate,'%d-%b-%Y') as startdate,DATE_FORMAT(enddate,'%d-%b-%Y') as
+            //  enddate,case when datediff(startdate,enddate)<0 then 0 else datediff(startdate,enddate) end as overdue,current_status,status_verification 
+            //  from training where trainer=? order by subject `, [name], (err, result) => {
+            //     if (err) throw err;
+            //     res.render('./viewtraining.ejs', { users: result, exceldata: exceldata, name: name });
+            // })
 
-        }
-        else {
-            //show specific data according to value selected
-            connection.query(`select id,subject,topic,DATE_FORMAT(startdate,'%d-%b-%Y') as startdate,DATE_FORMAT(enddate,'%d-%b-%Y') as 
+        // }
+        // else {
+        //     //show specific data according to value selected
+            // connection.query(`select id,subject,topic,DATE_FORMAT(startdate,'%d-%b-%Y') as startdate,DATE_FORMAT(enddate,'%d-%b-%Y') as 
+            // enddate,case when datediff(startdate,enddate)<0 then 0 else datediff(startdate,enddate) end as overdue,current_status,status_verification
+            //  from training where team=? and group1=? and part=? and project=? and member=? and trainer=? order by subject`, [team, group, part, project, member, name], (err, result) => {
+            //     if (err) throw err;
+            //     res.render('./viewtraining.ejs', { users: result, exceldata: exceldata, name: name });
+            // })
+        // }
+        if(!req.query.team || !req.query.group || !req.query.project || !req.query.part || !req.query.member){
+        connection.query(`select id,subject,topic,DATE_FORMAT(startdate,'%d-%b-%Y') as startdate,DATE_FORMAT(enddate,'%d-%b-%Y') as
+        enddate,case when datediff(startdate,enddate)<0 then 0 else datediff(startdate,enddate) end as overdue,current_status,status_verification 
+        from training where trainer=?`,[req.query.name], (err, result) => {
+           if (err) throw err;
+           console.log(req.query.name);
+           res.render('./viewtraining.ejs', { users: result, exceldata: exceldata, name: req.query.name });
+       })
+    }
+    else{
+        connection.query(`select id,subject,topic,DATE_FORMAT(startdate,'%d-%b-%Y') as startdate,DATE_FORMAT(enddate,'%d-%b-%Y') as 
             enddate,case when datediff(startdate,enddate)<0 then 0 else datediff(startdate,enddate) end as overdue,current_status,status_verification
-             from training where team=? and group1=? and part=? and project=? and member=? and trainer=? order by subject`, [team, group, part, project, member, name], (err, result) => {
+             from training where team=? and group1=? and part=? and project=? and member=? and trainer=? order by subject`, [req.query.team, req.query.group,req.query.part, req.query.project,req.query.member,req.query.name], (err, result) => {
                 if (err) throw err;
-                res.render('./viewtraining.ejs', { users: result, exceldata: exceldata, name: name });
+                res.render('./viewtraining.ejs', { users: result, exceldata: exceldata, name: req.query.name });
             })
-        }
+    }
+
     }
     else {
         res.send('Please login to view this page');
